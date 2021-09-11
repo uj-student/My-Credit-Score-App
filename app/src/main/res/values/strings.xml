@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyCreditScore</string>
+    <string name="network_unavailable_error">Please check your data connection and try again</string>
+    <string name="show_report">Show Report</string>
+    <string name="your_score_is">Your credit score is</string>
+    <string name="out_of_text">out of %1$s</string>
+    <string name="retry">Retry</string>
+    <string name="close">Close App</string>
+    <string name="pop_up_title">Something went wrong</string>
+    <string name="pop_up_message">Please retry. If the problem persist, please close the app and try again later.Feel free to also contact the guru on +27730171465</string>
+</resources>

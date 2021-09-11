@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mycreditscore.view.HomeFragment"
+        android:label="My Credit Score"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_creditReportFragment"
+            app:destination="@id/creditReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creditReportFragment"
+        android:name="com.example.mycreditscore.view.CreditReportFragment"
+        android:label="Credit Report Details"
+        tools:layout="@layout/fragment_credit_score_recycler_view">
+        <argument
+            android:name="creditScoreMap"
+            android:defaultValue="@null"/>
+    </fragment>
+</navigation>

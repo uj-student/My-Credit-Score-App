@@ -1,0 +1,4 @@
+- clean up layouts (ids, strings etc) X
+- fix colour themes
+- swipe to refresh
+- error scenarios - no network, 400 responses, etc
