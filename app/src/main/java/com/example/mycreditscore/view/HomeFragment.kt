@@ -120,16 +120,6 @@ class HomeFragment : Fragment() {
 
             }
         }
-
-        /*
-        fragmentHomeBinding?.pbDonut?.progressDrawable?.setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN)
-        val colors = intArrayOf(10928333, 6950317)
-        val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM, colors
-        )
-       println("Hello -> ${fragmentHomeBinding?.pbDonut?.progressBackgroundTintList}")
-       */
-
     }
 
     private fun startProgressAnimation(progressBar: ProgressBar, donutProgressScore: Int) {
