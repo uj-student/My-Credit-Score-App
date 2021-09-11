@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <ProgressBar
+        android:id="@+id/pbNetworkCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,18 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="@dimen/default_text_size"
         android:visibility="gone"
+        android:text="@string/network_unavailable_error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +47,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/donutContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_circle"
@@ -65,6 +70,7 @@
             tools:progress="60" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShowMoreDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
