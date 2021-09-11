@@ -53,11 +53,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toggleProgressIndicatorVisibility(true)
         if (isOnline(requireContext())) {
+            toggleNetworkErrorMessage(false)
             autoRetrieveCreditScoreData()
         } else {
+            toggleNetworkErrorMessage(true)
             toggleProgressIndicatorVisibility(false)
             toggleCreditScoreDisplay(false)
-            showNetworkError()
         }
         setUpListeners()
     }
@@ -71,7 +72,10 @@ class HomeFragment : Fragment() {
         }
 
         mSwipeRefreshLayout?.setOnRefreshListener {
-            manualRetrieveCreditScoreData()
+            if (isOnline(requireContext()))
+                manualRetrieveCreditScoreData()
+            else
+                mSwipeRefreshLayout?.isRefreshing = false
         }
     }
 
@@ -92,13 +96,6 @@ class HomeFragment : Fragment() {
                 exitProcess(0)
             }
         }
-    }
-
-    private fun showNetworkError() {
-        fragmentHomeBinding?.tvProgress?.visibility = View.VISIBLE
-        fragmentHomeBinding?.tvProgress?.text = getString(
-            R.string.network_unavailable_error
-        )
     }
 
     private fun updateProgressBar() {
@@ -156,28 +153,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun autoRetrieveCreditScoreData() {
-        lifecycleScope.launchWhenStarted {
-            creditScoreViewModel.state.collect { creditData ->
-                toggleProgressIndicatorVisibility(false)
-                when (creditData) {
-                    is Response.Error -> {
-                        errorPopup()
-                        creditData.exception.message?.let { message ->
-                            Log.e("ResponseError: ", message)
+        if (isOnline(requireContext())) {
+            toggleNetworkErrorMessage(false)
+            lifecycleScope.launchWhenStarted {
+                creditScoreViewModel.state.collect { creditData ->
+                    toggleProgressIndicatorVisibility(false)
+                    when (creditData) {
+                        is Response.Error -> {
+                            errorPopup()
+                            creditData.exception.message?.let { message ->
+                                Log.e("ResponseError: ", message)
+                            }
                         }
-                    }
-                    is Response.Success -> {
-                        toggleCreditScoreDisplay(true)
-                        creditScoreData = creditData.data
-                        updateCreditValues()
-                        updateProgressBar()
-                        creditScoreData?.let {
-                            creditDataMap = responseDataToMap(it)
+                        is Response.Success -> {
+                            toggleCreditScoreDisplay(true)
+                            creditScoreData = creditData.data
+                            updateCreditValues()
+                            updateProgressBar()
+                            creditScoreData?.let {
+                                creditDataMap = responseDataToMap(it)
+                            }
                         }
-                    }
-                    // just in case TODO()
-                    else -> {
-                        toggleProgressIndicatorVisibility(false)
+                        // just in case TODO()
+                        else -> {
+                            toggleProgressIndicatorVisibility(false)
+                        }
                     }
                 }
             }
@@ -202,6 +202,14 @@ class HomeFragment : Fragment() {
             fragmentHomeBinding?.donutContainer?.visibility = View.VISIBLE
         else
             fragmentHomeBinding?.donutContainer?.visibility = View.GONE
+    }
+
+    private fun toggleNetworkErrorMessage(show: Boolean) {
+        if (show)
+            fragmentHomeBinding?.tvProgress?.visibility = View.VISIBLE
+        else
+            fragmentHomeBinding?.tvProgress?.visibility = View.GONE
+        mSwipeRefreshLayout?.isRefreshing = show
     }
 
     override fun onDestroyView() {
