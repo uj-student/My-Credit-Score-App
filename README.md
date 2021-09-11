@@ -17,5 +17,5 @@ The app has 2 main functions:
 - network progress indicator won't show consistently
 
 ## Preview of App
-<img src="./credit_score_app.gif" width="240" height="240" />
+<img src="./credit_score_app.gif" width="480" height="480" />
 
