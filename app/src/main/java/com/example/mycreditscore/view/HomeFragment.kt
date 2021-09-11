@@ -154,6 +154,7 @@ class HomeFragment : Fragment() {
 
     private fun autoRetrieveCreditScoreData() {
         if (isOnline(requireContext())) {
+            toggleProgressIndicatorVisibility(true)
             toggleNetworkErrorMessage(false)
             lifecycleScope.launchWhenStarted {
                 creditScoreViewModel.state.collect { creditData ->
@@ -185,7 +186,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun manualRetrieveCreditScoreData() {
-        toggleProgressIndicatorVisibility(true)
         autoRetrieveCreditScoreData()
     }
 
