@@ -20,7 +20,9 @@ The app has 2 main functions:
 <img src="./credit_score_app.gif" width="360" />
 
 ## Test results
+Unit Test Results
 <img src="./unit-test-result.png" />
 
+UI Test Results
 <img src="./ui-test-result.png" />
 
